@@ -10,7 +10,7 @@
         xmlns:base="clr-namespace:HeBianGu.Base.WpfBase;assembly=HeBianGu.Base.WpfBase"
         mc:Ignorable="d" CaptionHeight="50" FIconSize="30" FIcon="&#xeabe;" 
         TextBlock.Foreground="{DynamicResource S_GrayLight}"
-        Title="影音播放器" Height="450" Width="800">
+        Title="影音播放器 By HeBianGu" Height="450" Width="800">
     <Window.Background>
         <SolidColorBrush Color="#FF02010F" Opacity="1"/>
     </Window.Background>

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Music.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HeBianGu.Base.WpfBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,6 +111,9 @@
       <Project>{9aa2d32f-9f7d-439a-b591-79f1d30ce230}</Project>
       <Name>HeBianGu.Product.General.MediaPlayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Music.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
