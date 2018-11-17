@@ -1,0 +1,20 @@
+﻿<wpfcontrollib:WindowBase x:Class="HeBianGu.Product.MediaPlayer.App.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeBianGu.Product.MediaPlayer.App.Demo" 
+        Style="{StaticResource DefaultWindowStyle}"
+        xmlns:media="clr-namespace:HeBianGu.Product.General.MediaPlayer;assembly=HeBianGu.Product.General.MediaPlayer"
+        xmlns:wpfcontrollib="clr-namespace:HeBianGu.General.WpfControlLib;assembly=HeBianGu.General.WpfControlLib"
+        xmlns:base="clr-namespace:HeBianGu.Base.WpfBase;assembly=HeBianGu.Base.WpfBase"
+        mc:Ignorable="d" CaptionHeight="50" FIconSize="30" FIcon="&#xeabe;" 
+        TextBlock.Foreground="{DynamicResource S_GrayLight}"
+        Title="影音播放器" Height="450" Width="800">
+    <Window.Background>
+        <SolidColorBrush Color="#FF02010F" Opacity="1"/>
+    </Window.Background>
+    <Grid>
+        <media:MediaPlayer/>
+    </Grid>
+</wpfcontrollib:WindowBase>

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{E1272CD8-1D37-442B-B5E3-41A85FAE9EA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{C06B0294-FA43-4764-A954-F45E89667309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.Product.MediaPlayer.App.Demo", "..\..\Source\Appliaction\HeBianGu.Product.MediaPlayer.App.Demo\HeBianGu.Product.MediaPlayer.App.Demo.csproj", "{BBA8446E-50F2-4E14-8D81-F4A99A60E66F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeBianGu.Product.General.MediaPlayer", "..\..\Source\General\HeBianGu.Product.General.MediaPlayer\HeBianGu.Product.General.MediaPlayer.csproj", "{9AA2D32F-9F7D-439A-B591-79F1D30CE230}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBA8446E-50F2-4E14-8D81-F4A99A60E66F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA8446E-50F2-4E14-8D81-F4A99A60E66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA8446E-50F2-4E14-8D81-F4A99A60E66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA8446E-50F2-4E14-8D81-F4A99A60E66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA2D32F-9F7D-439A-B591-79F1D30CE230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA2D32F-9F7D-439A-B591-79F1D30CE230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA2D32F-9F7D-439A-B591-79F1D30CE230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA2D32F-9F7D-439A-B591-79F1D30CE230}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBA8446E-50F2-4E14-8D81-F4A99A60E66F} = {E1272CD8-1D37-442B-B5E3-41A85FAE9EA9}
+		{9AA2D32F-9F7D-439A-B591-79F1D30CE230} = {C06B0294-FA43-4764-A954-F45E89667309}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDE9411F-FB4F-4CAB-A598-D72B57854E08}
+	EndGlobalSection
+EndGlobal
