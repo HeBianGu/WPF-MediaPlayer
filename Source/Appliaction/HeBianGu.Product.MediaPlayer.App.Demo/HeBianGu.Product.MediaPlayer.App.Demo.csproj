@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Music.ico</ApplicationIcon>
+    <ApplicationIcon>20181118034742753_easyicon_net_32.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HeBianGu.Base.WpfBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -114,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Music.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="20181118034742753_easyicon_net_32.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
