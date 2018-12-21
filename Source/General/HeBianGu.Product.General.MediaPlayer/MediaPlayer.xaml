@@ -124,9 +124,19 @@
                         <Slider x:Name="media_slider" Style="{DynamicResource SliderStyle1}"   Minimum="0" Maximum="0" Value="0"  VerticalAlignment="Center" Thumb.DragStarted="media_slider_DragStarted" Thumb.DragCompleted="media_slider_DragCompleted"/>
                     </DockPanel>
 
-                    <MediaElement x:Name="media_media" Source="{Binding ElementName=mediaBrower,Path=SelectFile}" LoadedBehavior="Manual"/>
-                </DockPanel>              
+                    <!--<MediaElement x:Name="media_media" Source="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi" LoadedBehavior="Manual"/>-->
 
+                    <MediaElement x:Name="media_media" Source="{Binding ElementName=mediaBrower,Path=SelectFile}" LoadedBehavior="Manual"/>
+
+                   
+                </DockPanel>
+
+                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>
+
+                <Canvas Background="Red" Opacity="0.3" Panel.ZIndex="100">
+                    <TextBlock Text="你好可以" FontSize="50" Canvas.Left="20" Canvas.Top="20"/>
+                </Canvas>
+                
                 <GridSplitter  Grid.Column="1" Width="5" Background="Transparent"/>
 
                 <local:MediaBrower x:Name="mediaBrower" MaxWidth="300" 
