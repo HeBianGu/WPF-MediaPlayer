@@ -126,16 +126,18 @@
 
                     <!--<MediaElement x:Name="media_media" Source="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi" LoadedBehavior="Manual"/>-->
 
+                    
                     <MediaElement x:Name="media_media" Source="{Binding ElementName=mediaBrower,Path=SelectFile}" LoadedBehavior="Manual"/>
 
-                   
                 </DockPanel>
-
-                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>
 
                 <Canvas Background="Red" Opacity="0.3" Panel.ZIndex="100">
                     <TextBlock Text="你好可以" FontSize="50" Canvas.Left="20" Canvas.Top="20"/>
                 </Canvas>
+
+                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>
+
+              
                 
                 <GridSplitter  Grid.Column="1" Width="5" Background="Transparent"/>
 
