@@ -131,11 +131,11 @@
 
                 </DockPanel>
 
-                <Canvas Background="Red" Opacity="0.3" Panel.ZIndex="100">
+                <!--<Canvas Background="Red" Opacity="0.3" Panel.ZIndex="100">
                     <TextBlock Text="你好可以" FontSize="50" Canvas.Left="20" Canvas.Top="20"/>
                 </Canvas>
 
-                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>
+                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>-->
 
               
                 
