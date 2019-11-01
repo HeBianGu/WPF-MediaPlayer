@@ -187,6 +187,57 @@ namespace HeBianGu.Product.General.MediaPlayer
             this.toggle_play.IsChecked = true;
             this.media_media.LoadedBehavior = MediaState.Manual;
         }
+
+
+
+
+        //public string VedioSource
+        //{
+        //    get { return (string)GetValue(VedioSourceProperty); }
+        //    set { SetValue(VedioSourceProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty VedioSourceProperty =
+        //    DependencyProperty.Register("VedioSource", typeof(string), typeof(MediaPlayer), new PropertyMetadata(default(string), (d, e) =>
+        //     {
+        //         MediaPlayer control = d as MediaPlayer;
+
+        //         if (control == null) return;
+
+        //         string config = e.NewValue as string;
+
+        //         //control.media_media.Source = new Uri(config, UriKind.RelativeOrAbsolute);
+
+        //         //control.Play();
+
+        //     }));
+
+
+        public Uri VedioSource
+        {
+            get { return (Uri)GetValue(VedioSourceProperty); }
+            set { SetValue(VedioSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VedioSourceProperty =
+            DependencyProperty.Register("VedioSource", typeof(Uri), typeof(MediaPlayer), new PropertyMetadata(default(Uri), (d, e) =>
+             {
+                 MediaPlayer control = d as MediaPlayer;
+
+                 if (control == null) return;
+
+                 Uri config = e.NewValue as Uri;
+
+                 control.media_media.Source = config;
+
+                 control.Stop();
+
+             }));
+
+
+
     }
 
 

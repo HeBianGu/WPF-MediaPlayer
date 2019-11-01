@@ -6,20 +6,13 @@
              xmlns:local="clr-namespace:HeBianGu.Product.General.MediaPlayer"
              xmlns:base="clr-namespace:HeBianGu.Base.WpfBase;assembly=HeBianGu.Base.WpfBase"
              xmlns:wpfcontrollib="clr-namespace:HeBianGu.General.WpfControlLib;assembly=HeBianGu.General.WpfControlLib"
-             mc:Ignorable="d" TextBlock.Foreground="{DynamicResource S_GrayLight}"
+             mc:Ignorable="d" TextBlock.Foreground="{DynamicResource S.Brush.TextForeground.White}" Background="Black"
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--自定义资源引用-->
-                <ResourceDictionary Source="/HeBianGu.Base.WpfBase;component/Themes/HeBianGu.Themes.Resource.xaml"/>
-                <ResourceDictionary Source="/HeBianGu.Base.WpfBase;component/Themes/Color/LightThemeResource.xaml"/>
-                <ResourceDictionary Source="/HeBianGu.General.WpfControlLib;component/Themes/HeBianGu.Themes.Default.xaml"/>
-                <ResourceDictionary Source="/HeBianGu.General.WpfControlLib;component/Themes/HeBianGu.Themes.Resource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
             <RoutedUICommand x:Key="Resource.RouteCommand.Play" Text="播放"/>
-
+            
             <Style x:Key="Style.Tool.Button" TargetType="{x:Type Button}">
                 <Setter Property="Width" Value="100"/>
                 <Setter Property="Height" Value="30"/>
@@ -29,19 +22,20 @@
                 <Setter Property="Height" Value="20"/>
             </Style>
 
-            <Style x:Key="Style.Slider.FButton" TargetType="{x:Type wpfcontrollib:FButton}" BasedOn="{StaticResource FButton_Transparency}">
+            <Style x:Key="Style.Slider.FButton" TargetType="{x:Type wpfcontrollib:FButton}" BasedOn="{StaticResource S.FButton.Style.Transparent}">
                 <Setter Property="Width" Value="30"/>
                 <Setter Property="Height" Value="20"/>
-                <Setter Property="Foreground" Value="{DynamicResource S_GrayLight}"/>
+                <Setter Property="Foreground" Value="{DynamicResource S.Brush.TextForeground.White}"/>
             </Style>
 
             <local:TimeSpanConverter x:Key="Convert.TimeSpan"/>
+            
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <DockPanel>
-            <Grid Height="60" DockPanel.Dock="Bottom"  Background="{DynamicResource TitleTextForeground}">
+            <Grid Height="60" DockPanel.Dock="Bottom"  Background="{DynamicResource S.Brush.Accent.Opacity.5}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="2*"/>
@@ -49,10 +43,10 @@
                 </Grid.ColumnDefinitions>
 
                 <DockPanel Grid.Column="0"  Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  Margin="5,0"   FIcon="&#xeada;" ToolTip="打開文件夾"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  Margin="5,0"   FIcon="&#xeada;" ToolTip="打开文件"/>
                     <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  FIcon="&#xe664;"/>
-                    <Slider x:Name="slider_sound" Style="{DynamicResource SliderStyle1}"  VerticalAlignment="Center" Thumb.DragCompleted="slider_sound_DragCompleted" Width="100" Minimum="0" Maximum="1" SmallChange="0.01" />
+                    
+                    <Slider x:Name="slider_sound" VerticalAlignment="Center" Thumb.DragCompleted="slider_sound_DragCompleted" Width="100" Minimum="0" Maximum="1" SmallChange="0.01" />
                 </DockPanel>
 
                 <DockPanel Grid.Column="2"  Margin="10,0" HorizontalAlignment="Right">
@@ -62,20 +56,20 @@
 
                 <DockPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe6a3;" ToolTip="暫停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe6a3;" ToolTip="暂停" />
 
                     <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe715;" ToolTip="播放" />
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" FIconSize="26" Margin="10,0" FIcon="&#xe684;" ToolTip="上一個"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" FIconSize="26" Margin="10,0" FIcon="&#xe684;" ToolTip="上一个"/>
 
-                    <ToggleButton x:Name="toggle_play"  Margin="10,0" Foreground="{DynamicResource S_GrayLight}" IsChecked="True" Click="ToggleButton_Click">
+                    <ToggleButton x:Name="toggle_play"  Margin="10,0" Foreground="{DynamicResource S.Brush.TextForeground.White}" IsChecked="True" Click="ToggleButton_Click">
                         <ToggleButton.Template>
                             <ControlTemplate TargetType="{x:Type ToggleButton}">
                                 <Grid>
-                                    <Ellipse x:Name="ellipse" Height="40" Width="40" Fill="{DynamicResource S_AccentBrush}" IsHitTestVisible="False">
+                                    <Ellipse x:Name="ellipse" Height="40" Width="40" Fill="{DynamicResource S.Brush.Accent}" IsHitTestVisible="False">
 
                                     </Ellipse>
-                                    <TextBlock Text="&#xe76e;" Style="{StaticResource FIcon}" x:Name="txt" Foreground="{TemplateBinding Foreground}"
+                                    <TextBlock Text="&#xe76e;" Style="{DynamicResource FIcon}" x:Name="txt" Foreground="{TemplateBinding Foreground}"
                                    FontSize="20" 
                                    ToolTip="显示"/>
                                 </Grid>
@@ -88,7 +82,7 @@
                                         <Setter Property="Opacity" Value="0.6" TargetName="ellipse"/>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Fill" Value="{DynamicResource S_AccentBrush}" TargetName="ellipse"/>
+                                        <Setter Property="Fill" Value="{DynamicResource S.Brush.Accent}" TargetName="ellipse"/>
                                     </Trigger>
                                     <Trigger Property="IsEnabled" Value="false">
                                         <Setter Property="Opacity" Value="0.5" TargetName="txt"/>
@@ -97,11 +91,11 @@
                             </ControlTemplate>
                         </ToggleButton.Template>
                     </ToggleButton>
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe687;" ToolTip="下一個"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe687;" ToolTip="下一个"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe746;" ToolTip="暫停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe746;" ToolTip="暂停" />
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe763;" ToolTip="暫停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe763;" ToolTip="暂停" />
 
                 </DockPanel>
             </Grid>
@@ -109,10 +103,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-
 
                 <DockPanel>
                     <DockPanel  DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" >
@@ -121,60 +112,14 @@
                         <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIcon="&#xe609;"  FIconSize="12" Width="18"  ToolTip="停止" DockPanel.Dock="Right" Click="Button_Click_4" VerticalAlignment="Center"/>
                         <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIcon="&#xe9bb;"  FIconSize="15" ToolTip="加速" Width="20"  DockPanel.Dock="Right"   Click="Button_Click_3" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ElementName=media_slider,Path=Maximum,Converter={StaticResource Convert.TimeSpan}}" Margin="3,0" VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                        <Slider x:Name="media_slider" Style="{DynamicResource SliderStyle1}"   Minimum="0" Maximum="0" Value="0"  VerticalAlignment="Center" Thumb.DragStarted="media_slider_DragStarted" Thumb.DragCompleted="media_slider_DragCompleted"/>
+                        <Slider x:Name="media_slider" Minimum="0" Maximum="0" Value="0"  VerticalAlignment="Center" Thumb.DragStarted="media_slider_DragStarted" Thumb.DragCompleted="media_slider_DragCompleted"/>
                     </DockPanel>
 
                     <!--<MediaElement x:Name="media_media" Source="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi" LoadedBehavior="Manual"/>-->
 
-                    
-                    <MediaElement x:Name="media_media" Source="{Binding ElementName=mediaBrower,Path=SelectFile}" LoadedBehavior="Manual"/>
+                    <MediaElement x:Name="media_media" LoadedBehavior="Manual"/>
 
                 </DockPanel>
-
-                <!--<Canvas Background="Red" Opacity="0.3" Panel.ZIndex="100">
-                    <TextBlock Text="你好可以" FontSize="50" Canvas.Left="20" Canvas.Top="20"/>
-                </Canvas>
-
-                <TextBlock Text="sfdsgsgd" Grid.Row="1" FontSize="80" Foreground="Black"/>-->
-
-              
-                
-                <GridSplitter  Grid.Column="1" Width="5" Background="Transparent"/>
-
-                <local:MediaBrower x:Name="mediaBrower" MaxWidth="300" 
-                           MinWidth="200" 
-                           Grid.Column="2"  
-                           Visibility="{Binding ElementName=toggle_visible,Path=IsChecked,Converter={x:Static base:XConverter.BooleanToVisibilityConverter}}" PlayClick="MediaBrower_PlayClick"/>
-
-                <ToggleButton  Grid.Column="1"
-                       HorizontalAlignment="Center" Margin="-5,0,0,0"
-                       x:Name="toggle_visible"  Foreground="{DynamicResource S_GrayLight}" IsChecked="True">
-                    <ToggleButton.Template>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Grid>
-                                <TextBlock Text="&#xe9be;" Style="{StaticResource FIcon}"
-                                   x:Name="txt" Foreground="{TemplateBinding Foreground}"
-                                   FontSize="20" 
-                                   ToolTip="显示"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsChecked" Value="true">
-                                    <Setter Property="Text" Value="&#xe9bf;" TargetName="txt" />
-                                    <Setter Property="ToolTip" Value="隐藏" TargetName="txt" />
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Foreground" Value="{DynamicResource S_AccentBrush}" TargetName="txt"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Foreground" Value="{DynamicResource S_GrayNotice}" TargetName="txt"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Opacity" Value="0.5" TargetName="txt"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </ToggleButton.Template>
-                </ToggleButton>
             </Grid>
 
         </DockPanel>

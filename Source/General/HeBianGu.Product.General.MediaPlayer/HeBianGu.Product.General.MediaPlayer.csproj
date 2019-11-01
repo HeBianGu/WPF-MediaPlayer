@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HeBianGu.Base.WpfBase">
-      <HintPath>..\..\..\Product\Dll\HeBianGu.Base.WpfBase.dll</HintPath>
+    <Reference Include="HeBianGu.Base.WpfBase, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.Base.WpfBase.2.0.1\lib\net45\HeBianGu.Base.WpfBase.dll</HintPath>
     </Reference>
-    <Reference Include="HeBianGu.General.WpfControlLib">
-      <HintPath>..\..\..\Product\Dll\HeBianGu.General.WpfControlLib.dll</HintPath>
+    <Reference Include="HeBianGu.General.WpfControlLib, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.General.WpfControlLib.2.0.1\lib\net45\HeBianGu.General.WpfControlLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,9 +53,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MediaBrower.xaml.cs">
-      <DependentUpon>MediaBrower.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MediaPlayer.xaml.cs">
       <DependentUpon>MediaPlayer.xaml</DependentUpon>
     </Compile>
@@ -76,16 +73,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MediaBrower.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="MediaPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

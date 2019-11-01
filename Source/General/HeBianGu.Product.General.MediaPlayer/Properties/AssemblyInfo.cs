@@ -8,11 +8,11 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("HeBianGu.Product.General.MediaPlayer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("视频播放控件")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("河边骨")]
 [assembly: AssemblyProduct("HeBianGu.Product.General.MediaPlayer")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

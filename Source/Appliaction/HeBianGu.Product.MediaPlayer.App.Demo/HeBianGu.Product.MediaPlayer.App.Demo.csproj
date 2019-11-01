@@ -36,13 +36,11 @@
     <ApplicationIcon>20181118034742753_easyicon_net_32.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HeBianGu.Base.WpfBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Product\Dll\HeBianGu.Base.WpfBase.dll</HintPath>
+    <Reference Include="HeBianGu.Base.WpfBase, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.Base.WpfBase.2.0.1\lib\net45\HeBianGu.Base.WpfBase.dll</HintPath>
     </Reference>
-    <Reference Include="HeBianGu.General.WpfControlLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Product\Dll\HeBianGu.General.WpfControlLib.dll</HintPath>
+    <Reference Include="HeBianGu.General.WpfControlLib, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.General.WpfControlLib.2.0.1\lib\net45\HeBianGu.General.WpfControlLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\..\Product\Dll\Microsoft.Windows.Shell.dll</HintPath>
@@ -98,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
