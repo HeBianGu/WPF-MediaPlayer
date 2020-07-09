@@ -43,24 +43,24 @@
                 </Grid.ColumnDefinitions>
 
                 <DockPanel Grid.Column="0"  Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  Margin="5,0"   FIcon="&#xeada;" ToolTip="打开文件"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" Command="{x:Static local:MediaPlayer.OpenFile}"  FIconSize="15"  Margin="5,0"   FIcon="&#xeada;" ToolTip="打开文件"/>
                     <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  FIcon="&#xe664;"/>
                     
                     <Slider x:Name="slider_sound" VerticalAlignment="Center" Thumb.DragCompleted="slider_sound_DragCompleted" Width="100" Minimum="0" Maximum="1" SmallChange="0.01" />
                 </DockPanel>
 
                 <DockPanel Grid.Column="2"  Margin="10,0" HorizontalAlignment="Right">
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  FIcon="&#xe9d0;" ToolTip="全屏"/>
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="18"  FIcon="&#xeb3a;" ToolTip="菜單"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="15"  FIcon="&#xe9d0;" ToolTip="全屏"  IsEnabled="False"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="18"  FIcon="&#xeb3a;" ToolTip="菜單"  IsEnabled="False"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe6a3;" ToolTip="暂停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe6a3;" ToolTip="暂停" IsEnabled="False"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe715;" ToolTip="播放" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe715;" ToolTip="播放"  IsEnabled="False"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" FIconSize="26" Margin="10,0" FIcon="&#xe684;" ToolTip="上一个"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" FIconSize="26" Margin="10,0" FIcon="&#xe684;" ToolTip="上一个"  IsEnabled="False"/>
 
                     <ToggleButton x:Name="toggle_play"  Margin="10,0" Foreground="{DynamicResource S.Brush.TextForeground.White}" IsChecked="True" Click="ToggleButton_Click">
                         <ToggleButton.Template>
@@ -91,11 +91,11 @@
                             </ControlTemplate>
                         </ToggleButton.Template>
                     </ToggleButton>
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe687;" ToolTip="下一个"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe687;" ToolTip="下一个"  IsEnabled="False"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe746;" ToolTip="暂停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe746;" ToolTip="暂停"  IsEnabled="False"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe763;" ToolTip="暂停" />
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe763;" ToolTip="暂停"  IsEnabled="False"/>
 
                 </DockPanel>
             </Grid>

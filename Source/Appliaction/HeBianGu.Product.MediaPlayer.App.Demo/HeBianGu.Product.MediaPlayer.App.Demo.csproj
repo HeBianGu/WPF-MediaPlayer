@@ -36,16 +36,14 @@
     <ApplicationIcon>20181118034742753_easyicon_net_32.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HeBianGu.Base.WpfBase, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.Base.WpfBase.2.0.1\lib\net45\HeBianGu.Base.WpfBase.dll</HintPath>
+    <Reference Include="HeBianGu.Base.WpfBase, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.Base.WpfBase.2.1.4\lib\net45\HeBianGu.Base.WpfBase.dll</HintPath>
     </Reference>
-    <Reference Include="HeBianGu.General.WpfControlLib, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.General.WpfControlLib.2.0.1\lib\net45\HeBianGu.General.WpfControlLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Windows.Shell">
-      <HintPath>..\..\..\Product\Dll\Microsoft.Windows.Shell.dll</HintPath>
+    <Reference Include="HeBianGu.General.WpfControlLib, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solution\HeBianGu.Product.MediaPlayer\packages\HeBianGu.General.WpfControlLib.2.1.4\lib\net45\HeBianGu.General.WpfControlLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />

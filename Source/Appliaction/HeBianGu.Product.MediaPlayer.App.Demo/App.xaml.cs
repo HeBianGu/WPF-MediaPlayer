@@ -14,43 +14,53 @@ namespace HeBianGu.Product.MediaPlayer.App.Demo
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
-    public partial class App : Application
+    public partial class App : ApplicationBase
     {
-
-        public App()
-        {
-            DispatcherUnhandledException += App_DispatcherUnhandledException;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-        }
-
-        void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            Application.Current.Dispatcher.Invoke(() => MessageWindow.ShowSumit(e.Exception.Message, "系统异常", 5));
-
-            e.Handled = true;
-        }
-
-
-        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Exception error = (Exception)e.ExceptionObject;
-
-            Application.Current.Dispatcher.Invoke(() => MessageWindow.ShowSumit("当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员", "意外的操作"));
-        }
-
-
         protected override void OnStartup(StartupEventArgs e)
         {
-            //  Do：设置默认主题
-            ThemeService.Current.AccentColor = Color.FromRgb(0x33, 0x99, 0x33);
-
-            ThemeService.Current.StartAnimationTheme(1000);
-
             MainWindow shellWindow = new MainWindow();
 
             shellWindow.Show();
 
             base.OnStartup(e);
+        }
+
+
+        protected override void ConfigureServices(IServiceCollection services)
+        {
+            ////  Do ：注册本地化配置读写服务
+            //services.AddSingleton<IThemeLocalizeService, AssemblyDomain>();
+
+            ////  Do ：注册日志服务
+            //services.AddSingleton<ILogService, AssemblyDomain>();
+
+
+        }
+
+        protected override void Configure(IApplicationBuilder app)
+        {
+            //  Do：设置默认主题
+            app.UseLocalTheme(l =>
+            {
+                l.AccentColor = Color.FromRgb(0x64, 0x76, 0x87);
+                l.SmallFontSize = 15D;
+                l.LargeFontSize = 18D;
+                l.FontSize = FontSize.Small;
+
+                l.ItemHeight = 35;
+                //l.ItemWidth = 120;
+                l.ItemCornerRadius =5;
+
+                l.AnimalSpeed = 5000;
+
+                l.AccentColorSelectType = 0;
+
+                l.IsUseAnimal = true;
+
+                l.ThemeType = ThemeType.Light;
+
+                l.Language = Language.Chinese;
+            });
         }
     }
 }

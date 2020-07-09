@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -27,6 +28,21 @@ namespace HeBianGu.Product.General.MediaPlayer
         {
             InitializeComponent();
 
+            CommandBinding binding = new CommandBinding(MediaPlayer.OpenFile, (l, k) =>
+             {
+                 OpenFileDialog dialog = new OpenFileDialog();
+
+                 var r = dialog.ShowDialog();
+
+                 if (r.HasValue && r.Value)
+                 {
+                     this.VedioSource = new Uri(dialog.FileName, UriKind.Absolute);
+                 }
+
+             });
+
+            this.CommandBindings.Add(binding);
+
             this.media_media.MediaEnded += Player_MediaEnded;
             this.media_media.MediaOpened += Player_MediaOpened;
             this.media_media.MediaFailed += Player_MediaFailed;
@@ -36,7 +52,7 @@ namespace HeBianGu.Product.General.MediaPlayer
             _timer.Interval = 1000;
 
         }
-      
+
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -240,6 +256,10 @@ namespace HeBianGu.Product.General.MediaPlayer
 
     }
 
+    public partial class MediaPlayer
+    {
+        public static RoutedUICommand OpenFile = new RoutedUICommand();
+    }
 
     public class TimeSpanConverter : IValueConverter
     {

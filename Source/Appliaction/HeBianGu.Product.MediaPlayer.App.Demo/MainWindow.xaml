@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeBianGu.Product.MediaPlayer.App.Demo" 
-        Style="{DynamicResource DefaultWindowStyle}"
+        Style="{DynamicResource S.Window.Blur.Default}"
         xmlns:media="clr-namespace:HeBianGu.Product.General.MediaPlayer;assembly=HeBianGu.Product.General.MediaPlayer"
         xmlns:wpfcontrollib="clr-namespace:HeBianGu.General.WpfControlLib;assembly=HeBianGu.General.WpfControlLib"
         xmlns:base="clr-namespace:HeBianGu.Base.WpfBase;assembly=HeBianGu.Base.WpfBase"
