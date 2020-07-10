@@ -9,7 +9,7 @@
         xmlns:wpfcontrollib="clr-namespace:HeBianGu.General.WpfControlLib;assembly=HeBianGu.General.WpfControlLib"
         xmlns:base="clr-namespace:HeBianGu.Base.WpfBase;assembly=HeBianGu.Base.WpfBase"
         mc:Ignorable="d" CaptionHeight="50" FIconSize="30" FIcon="&#xeabe;"
-        Title="影音播放器 By HeBianGu" Height="650" Width="1000">
+        Title="影音播放器 By MediaElement" Height="650" Width="1000">
     <Grid>
         <!--<media:MediaPlayer VedioSource="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi"/>-->
         <media:MediaPlayer VedioSource=" F:\eeee.wmv"/>
