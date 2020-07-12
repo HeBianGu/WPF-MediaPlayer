@@ -59,15 +59,17 @@ namespace HeBianGu.General.VLCMediaPlayer
 
                     this.OnShootCut(filePath);
 
-                }, (l, k) =>
-                {
-                    if (this.vlccontrol?.SourceProvider?.MediaPlayer == null)
-                    {
-                        k.CanExecute = false;
-                        return;
-                    }
-                    k.CanExecute = this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Paused || this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Playing;
                 });
+
+                //, (l, k) =>
+                //  {
+                //      if (this.vlccontrol?.SourceProvider?.MediaPlayer == null)
+                //      {
+                //          k.CanExecute = false;
+                //          return;
+                //      }
+                //      k.CanExecute = this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Paused || this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Playing;
+                //  }
 
                 this.CommandBindings.Add(binding);
             }
@@ -262,7 +264,7 @@ namespace HeBianGu.General.VLCMediaPlayer
 
             this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged -= MediaPlayer_LengthChanged;
 
-            this.vlccontrol?.Dispose();
+            Task.Run(()=> this.vlccontrol?.Dispose());
         }
 
         private async void media_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
