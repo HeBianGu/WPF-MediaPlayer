@@ -1,10 +1,13 @@
-﻿using Microsoft.Win32;
+﻿using HeBianGu.Base.WpfBase;
+using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,7 +20,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Vlc.DotNet.Core;
+using Vlc.DotNet.Core.Interops.Signatures;
 using Vlc.DotNet.Wpf;
+using Path = System.IO.Path;
 
 namespace HeBianGu.General.VLCMediaPlayer
 {
@@ -30,20 +35,42 @@ namespace HeBianGu.General.VLCMediaPlayer
         {
             InitializeComponent();
 
-            CommandBinding binding = new CommandBinding(VLCPlayer.OpenFile, (l, k) =>
             {
-                OpenFileDialog dialog = new OpenFileDialog();
-
-                var r = dialog.ShowDialog();
-
-                if (r.HasValue && r.Value)
+                CommandBinding binding = new CommandBinding(VLCPlayer.OpenFile, (l, k) =>
                 {
-                    this.VedioSource = new Uri(dialog.FileName, UriKind.Absolute);
-                }
+                    OpenFileDialog dialog = new OpenFileDialog();
 
-            });
+                    var r = dialog.ShowDialog();
 
-            this.CommandBindings.Add(binding);
+                    if (r.HasValue && r.Value)
+                    {
+                        this.VedioSource = new Uri(dialog.FileName, UriKind.Absolute);
+                    }
+
+                });
+
+                this.CommandBindings.Add(binding);
+            }
+
+            {
+                CommandBinding binding = new CommandBinding(VLCPlayer.ShootCutCommand, async (l, k) =>
+                {
+                    string filePath = await this.BeginShootCut();
+
+                    this.OnShootCut(filePath);
+
+                }, (l, k) =>
+                {
+                    if (this.vlccontrol?.SourceProvider?.MediaPlayer == null)
+                    {
+                        k.CanExecute = false;
+                        return;
+                    }
+                    k.CanExecute = this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Paused || this.vlccontrol.SourceProvider.MediaPlayer.State == MediaStates.Playing;
+                });
+
+                this.CommandBindings.Add(binding);
+            }
 
 
         }
@@ -76,8 +103,39 @@ namespace HeBianGu.General.VLCMediaPlayer
 
         VlcControl vlccontrol = null;
 
+        /// <summary> 设置当前显示时间 </summary>
+        public TimeSpan Time
+        {
+            get { return (TimeSpan)GetValue(TimeProperty); }
+            set { SetValue(TimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TimeProperty =
+            DependencyProperty.Register("Time", typeof(TimeSpan), typeof(VLCPlayer), new PropertyMetadata(default(TimeSpan), async (d, e) =>
+             {
+                 VLCPlayer control = d as VLCPlayer;
+
+                 if (control == null) return;
+
+                 TimeSpan config = (TimeSpan)e.NewValue;
+
+                 await Task.Run(() => control.vlccontrol.SourceProvider.MediaPlayer.Time = (long)config.TotalMilliseconds);
+
+             }));
+
+
         void InitVlc()
         {
+
+            if (this.vlccontrol != null)
+            {
+                this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged -= MediaPlayer_PositionChanged;
+
+                this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged -= MediaPlayer_LengthChanged;
+            }
+
+
             this.vlccontrol = new VlcControl();
 
             this.ControlContainer.Content = this.vlccontrol;
@@ -88,16 +146,22 @@ namespace HeBianGu.General.VLCMediaPlayer
 
             this.vlccontrol.SourceProvider.CreatePlayer(libDirectory/* pass your player parameters here */);
 
+            this.vlccontrol.SourceProvider.MediaPlayer.Video.IsMouseInputEnabled = false;
+            this.vlccontrol.SourceProvider.MediaPlayer.Video.IsKeyInputEnabled = false;
 
-            this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged += (l, k) =>
-            {
-                this.RefreshSlider();
-            };
+            this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
 
-            this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged += (l, k) =>
-            {
-                this.InitSlider();
-            };
+            this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged += MediaPlayer_LengthChanged;
+        }
+
+        private void MediaPlayer_LengthChanged(object sender, VlcMediaPlayerLengthChangedEventArgs e)
+        {
+            this.InitSlider();
+        }
+
+        private void MediaPlayer_PositionChanged(object sender, VlcMediaPlayerPositionChangedEventArgs e)
+        {
+            this.RefreshSlider();
         }
 
         /// <summary> 初始化播放进度条 </summary>
@@ -190,16 +254,22 @@ namespace HeBianGu.General.VLCMediaPlayer
             this.vlccontrol?.SourceProvider.MediaPlayer.Pause();
         }
 
-        void Stop()
+        public void Stop()
         {
             this.toggle_play.IsChecked = true;
+
+            this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged -= MediaPlayer_PositionChanged;
+
+            this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged -= MediaPlayer_LengthChanged;
 
             this.vlccontrol?.Dispose();
         }
 
-        private void media_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void media_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this.vlccontrol.SourceProvider.MediaPlayer.Time = (long)this.media_slider.Value;
+            long value = (long)this.media_slider.Value;
+
+            await Task.Run(() => this.vlccontrol.SourceProvider.MediaPlayer.Time = value);
         }
 
         private void slider_sound_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -219,11 +289,132 @@ namespace HeBianGu.General.VLCMediaPlayer
         {
             this.vlccontrol.SourceProvider.MediaPlayer.Video.FullScreen = true;
         }
+
+
+        public IEnumerable ItemSource
+        {
+            get { return (IEnumerable)GetValue(ItemSourceProperty); }
+            set { SetValue(ItemSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemSourceProperty =
+            DependencyProperty.Register("ItemSource", typeof(IEnumerable), typeof(VLCPlayer), new PropertyMetadata(default(IEnumerable), (d, e) =>
+             {
+                 VLCPlayer control = d as VLCPlayer;
+
+                 if (control == null) return;
+
+                 IEnumerable config = e.NewValue as IEnumerable;
+
+             }));
+
+
+        public object SelectedItem
+        {
+            get { return (object)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(VLCPlayer), new PropertyMetadata(default(object), (d, e) =>
+             {
+                 VLCPlayer control = d as VLCPlayer;
+
+                 if (control == null) return;
+
+                 object config = e.NewValue as object;
+
+             }));
+
+
+
+
+        public object ContentControl
+        {
+            get { return (object)GetValue(ContentControlProperty); }
+            set { SetValue(ContentControlProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContentControlProperty =
+            DependencyProperty.Register("ContentControl", typeof(object), typeof(VLCPlayer), new PropertyMetadata(default(object), (d, e) =>
+             {
+                 VLCPlayer control = d as VLCPlayer;
+
+                 if (control == null) return;
+
+                 object config = e.NewValue as object;
+
+             }));
+
+        public TimeSpan GetTime()
+        {
+            if (this.vlccontrol?.SourceProvider == null) return TimeSpan.Zero;
+
+            return TimeSpan.FromMilliseconds(this.vlccontrol.SourceProvider.MediaPlayer.Time);
+        }
+
+        public ImageSource GetVlc()
+        {
+            return this.vlccontrol.SourceProvider.VideoSource;
+        }
+
+        string ShotCutPat { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HeBianGu", Assembly.GetExecutingAssembly().GetName().Name, "ShootCut");
+
+
+
+        //声明和注册路由事件
+        public static readonly RoutedEvent ShootCutRoutedEvent =
+            EventManager.RegisterRoutedEvent("ShootCut", RoutingStrategy.Bubble, typeof(EventHandler<ObjectRoutedEventArgs<string>>), typeof(VLCPlayer));
+        //CLR事件包装
+        public event RoutedEventHandler ShootCut
+        {
+            add { this.AddHandler(ShootCutRoutedEvent, value); }
+            remove { this.RemoveHandler(ShootCutRoutedEvent, value); }
+        }
+
+        //激发路由事件,借用Click事件的激发方法
+
+        protected void OnShootCut(string uri)
+        {
+            ObjectRoutedEventArgs<string> args = new ObjectRoutedEventArgs<string>(ShootCutRoutedEvent, this);
+
+            args.Entity = uri;
+
+            this.RaiseEvent(args);
+        }
+
+        public async Task<string> BeginShootCut()
+        {
+            string name = Path.GetFileNameWithoutExtension(this.VedioSource?.LocalPath);
+
+            string timespan = TimeSpan.FromMilliseconds(this.vlccontrol.SourceProvider.MediaPlayer.Time).Ticks.ToString();
+
+            string filePath = Path.Combine(ShotCutPat, name, timespan + ".jpg");
+
+            if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            }
+
+            return await Task.Run(() =>
+              {
+                  this.vlccontrol.SourceProvider.MediaPlayer.TakeSnapshot(new FileInfo(filePath));
+
+                  return filePath;
+              });
+        }
+
+
     }
 
     public partial class VLCPlayer
     {
         public static RoutedUICommand OpenFile = new RoutedUICommand();
+
+        public static RoutedUICommand ShootCutCommand = new RoutedUICommand();
     }
 
     public class TimeSpanConverter : IValueConverter
@@ -232,9 +423,12 @@ namespace HeBianGu.General.VLCMediaPlayer
         {
             if (value == null) return null;
 
+            //if (value.ToString() == "0") return "0";
+            //if (value.ToString() == "100") return "100";
+
             var d = double.Parse(value.ToString());
 
-            var sp = TimeSpan.FromMilliseconds((long)d);
+            var sp = TimeSpan.FromTicks((long)d);
 
             return sp.ToString().Split('.')[0];
         }
@@ -244,4 +438,5 @@ namespace HeBianGu.General.VLCMediaPlayer
             throw new NotImplementedException();
         }
     }
+
 }

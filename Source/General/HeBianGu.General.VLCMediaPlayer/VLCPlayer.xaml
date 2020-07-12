@@ -47,13 +47,14 @@
 
                     <Slider x:Name="slider_sound" VerticalAlignment="Center" IsSnapToTickEnabled="True"  IsMoveToPointEnabled="True" 
                             ValueChanged="slider_sound_ValueChanged" Value="100"  Width="100" Minimum="0" Maximum="100" SmallChange="1" />
+
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=local:VLCPlayer},Path=Rate,StringFormat={}{0}X}" Style="{DynamicResource S.TextBlock.Default}" Foreground="White"/>
+
                 </DockPanel>
 
-                <DockPanel Grid.Column="2"  Margin="10,0" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=local:VLCPlayer},Path=Rate,StringFormat={}{0}X}" Style="{DynamicResource S.TextBlock.Default}" Foreground="White"/>
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" Click="FButton_Click_Full"  FIconSize="15"  FIcon="&#xe9d0;" ToolTip="全屏"/>
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="18"  FIcon="&#xeb3a;" ToolTip="菜單"  IsEnabled="False"/>
-                </DockPanel>
+                <Grid Grid.Column="2"  Margin="10,0" HorizontalAlignment="Right">
+                    <ContentControl Content="{Binding RelativeSource={RelativeSource AncestorType=local:VLCPlayer},Path=ContentControl}"/>
+                </Grid>
 
                 <DockPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -92,9 +93,10 @@
                             </ControlTemplate>
                         </ToggleButton.Template>
                     </ToggleButton>
+                   
                     <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe687;" ToolTip="下一个"  IsEnabled="False"/>
 
-                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe746;" ToolTip="暂停"  IsEnabled="False"/>
+                    <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}" FIconSize="26" Command="{x:Static local:VLCPlayer.ShootCutCommand}" Margin="10,0"   FIcon="&#xe746;" ToolTip="截图"/>
 
                     <wpfcontrollib:FButton Style="{StaticResource Style.Slider.FButton}"  FIconSize="26"  Margin="10,0"   FIcon="&#xe763;" ToolTip="暂停"  IsEnabled="False"/>
 
@@ -115,15 +117,18 @@
                         <TextBlock Text="{Binding ElementName=media_slider,Path=Maximum,Converter={StaticResource Convert.TimeSpan}}" Margin="3,0" VerticalAlignment="Center" DockPanel.Dock="Right"/>
                         <Slider x:Name="media_slider" Minimum="0" Maximum="0" Value="0" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" ValueChanged="media_slider_ValueChanged"  VerticalAlignment="Center"/>
                     </DockPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentControl  Name="ControlContainer"/>
 
-                    <!--<MediaElement x:Name="media_media" Source="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi" LoadedBehavior="Manual"/>-->
-
-                    <!--<MediaElement x:Name="media_media" LoadedBehavior="Manual"/>-->
-
-                    <!--<vlc:VlcControl x:Name="vlccontrol"/>-->
-
-                    <ContentControl  Name="ControlContainer"/>
-                    
+                        <ListBox Grid.Column="1" Background="Transparent" VerticalAlignment="Bottom"
+                                 SelectedItem="{Binding RelativeSource={RelativeSource AncestorType=local:VLCPlayer},Path=SelectedItem}"
+                                 ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=local:VLCPlayer},Path=ItemSource}"/>
+                    </Grid>
+                  
                 </DockPanel>
             </Grid>
 
