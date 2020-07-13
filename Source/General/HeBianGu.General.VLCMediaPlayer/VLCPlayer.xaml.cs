@@ -130,7 +130,7 @@ namespace HeBianGu.General.VLCMediaPlayer
         void InitVlc()
         {
 
-            if (this.vlccontrol != null)
+            if (this.vlccontrol?.SourceProvider?.MediaPlayer != null)
             {
                 this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged -= MediaPlayer_PositionChanged;
 
@@ -148,8 +148,8 @@ namespace HeBianGu.General.VLCMediaPlayer
 
             this.vlccontrol.SourceProvider.CreatePlayer(libDirectory/* pass your player parameters here */);
 
-            this.vlccontrol.SourceProvider.MediaPlayer.Video.IsMouseInputEnabled = false;
-            this.vlccontrol.SourceProvider.MediaPlayer.Video.IsKeyInputEnabled = false;
+            //this.vlccontrol.SourceProvider.MediaPlayer.Video.IsMouseInputEnabled = false;
+            //this.vlccontrol.SourceProvider.MediaPlayer.Video.IsKeyInputEnabled = false;
 
             this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
 
@@ -248,11 +248,15 @@ namespace HeBianGu.General.VLCMediaPlayer
 
         void Play()
         {
+            if (this.vlccontrol?.SourceProvider?.MediaPlayer == null) return;
+
             this.vlccontrol?.SourceProvider.MediaPlayer.Play();
         }
 
         void Pause()
         {
+            if (this.vlccontrol?.SourceProvider?.MediaPlayer == null) return;
+
             this.vlccontrol?.SourceProvider.MediaPlayer.Pause();
         }
 
@@ -260,9 +264,13 @@ namespace HeBianGu.General.VLCMediaPlayer
         {
             this.toggle_play.IsChecked = true;
 
+            if (this.vlccontrol?.SourceProvider?.MediaPlayer == null) return;
+
             this.vlccontrol.SourceProvider.MediaPlayer.PositionChanged -= MediaPlayer_PositionChanged;
 
             this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged -= MediaPlayer_LengthChanged;
+
+            this.media_slider.Value = 0;
 
             Task.Run(()=> this.vlccontrol?.Dispose());
         }
@@ -425,12 +433,9 @@ namespace HeBianGu.General.VLCMediaPlayer
         {
             if (value == null) return null;
 
-            //if (value.ToString() == "0") return "0";
-            //if (value.ToString() == "100") return "100";
+            var d = long.Parse(value.ToString());
 
-            var d = double.Parse(value.ToString());
-
-            var sp = TimeSpan.FromTicks((long)d);
+            var sp = TimeSpan.FromMilliseconds(d);
 
             return sp.ToString().Split('.')[0];
         }
