@@ -137,7 +137,6 @@ namespace HeBianGu.General.VLCMediaPlayer
                 this.vlccontrol.SourceProvider.MediaPlayer.LengthChanged -= MediaPlayer_LengthChanged;
             }
 
-
             this.vlccontrol = new VlcControl();
 
             this.ControlContainer.Content = this.vlccontrol;
@@ -372,9 +371,7 @@ namespace HeBianGu.General.VLCMediaPlayer
         }
 
         string ShotCutPat { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "HeBianGu", Assembly.GetExecutingAssembly().GetName().Name, "ShootCut");
-
-
-
+         
         //声明和注册路由事件
         public static readonly RoutedEvent ShootCutRoutedEvent =
             EventManager.RegisterRoutedEvent("ShootCut", RoutingStrategy.Bubble, typeof(EventHandler<ObjectRoutedEventArgs<string>>), typeof(VLCPlayer));
