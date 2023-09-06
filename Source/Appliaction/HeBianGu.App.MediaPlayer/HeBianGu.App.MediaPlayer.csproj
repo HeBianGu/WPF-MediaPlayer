@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+	 <LangVersion>8.0</LangVersion>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+
+    <Version>1.0.4</Version>
+    <Product>H影音</Product>
+    <Description>H影音</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Copyright>Copyright © HeBianGu 2019-2023</Copyright>
+    <Authors>HeBianGu </Authors>
+    <PackageProjectUrl>https://github.com/HeBianGu</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HeBianGu.Control.Vlc" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Systems.About" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Systems.Setting" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Systems.Start" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Systems.Upgrade" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Systems.XmlSerialize" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Window.Blur" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Window.Message" Version="5.0.0" />
+    <PackageReference Include="HeBianGu.Window.MessageDialog" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>
